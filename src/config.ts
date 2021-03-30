@@ -1,7 +1,7 @@
 export const Config = {
-    AADRedirectURI: 'http://localhost:4001',
     AADLoginServer: 'https://login.microsoftonline.com',
-    AADClientID: '',
-    AADDirectoryID: '',
-    applicationHost: ''
+    AADClientID: '<YOUR AAD APPLICATION CLIENT ID HERE>',
+    AADDirectoryID: '<YOUR ADD APPLICATION DIRECTORY ID HERE>',
+    AADRedirectURI: 'http://localhost:4005',
+    applicationHost: '<YOUR IOT CENTRAL APPLICATION HOST NAME>'
 }
