@@ -22,8 +22,8 @@ function Table({ data }: { data: any }) {
                     })
                     keyFound[key] = true;
                 }
-                rows.push(element);
             }
+            rows.push(element);
         })
         setTableData({ rows, cols });
     }, [data]);
