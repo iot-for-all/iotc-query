@@ -5,7 +5,7 @@
   "dependencies": {
     "@azure/msal-browser": "^2.12.0",
     "@fluentui/react": "^8.3.0",
-    "@microsoft/azure-iot-ux-fluent-controls": "^8.0.8",
+    "@microsoft/azure-iot-ux-fluent-controls": "file:microsoft-azure-iot-ux-fluent-controls-8.0.8.tgz",
     "@microsoft/azure-iot-ux-fluent-css": "^8.1.5",
     "@monaco-editor/react": "^4.0.11",
     "@testing-library/jest-dom": "^5.11.9",
