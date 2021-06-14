@@ -22,8 +22,8 @@ function makeQuery(authContext: any, query: string) {
     return new Promise(async (resolve, reject) => {
         const accessToken = await authContext.getAccessToken();
         try {
-            const res: any = await makeAPICall('post', `https://${authContext.applicationHost}/api/alpha/query`, { query }, accessToken);
-            resolve(res.data);
+            const res: any = await makeAPICall('post', `https://${authContext.applicationHost}/api/query?api-version=preview`, { query }, accessToken);
+            resolve(res.data.results || res.data);
         } catch (error) {
             reject(error.message || error.response.data.error.message);
         }
@@ -94,7 +94,7 @@ function Tile({ config, polling, pollingDelay }: { config: any, polling: boolean
     // After the data has been fetched, set the render data object
     React.useEffect(() => {
         if (queryResults) {
-            setFetchResults(queryResults.body);
+            setFetchResults(queryResults);
         }
     }, [queryResults])
 

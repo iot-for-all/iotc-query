@@ -34,8 +34,8 @@ function makeQuery(authContext: any, query: string) {
     return new Promise(async (resolve, reject) => {
         const accessToken = await authContext.getAccessToken();
         try {
-            const res: any = await makeAPICall('post', `https://${authContext.applicationHost}/api/alpha/query`, { query }, accessToken);
-            resolve(res.data);
+            const res: any = await makeAPICall('post', `https://${authContext.applicationHost}/api/query?api-version=preview`, { query }, accessToken);
+            resolve(res.data.results || res.data);
         } catch (error) {
             reject(error.response.data.error.message);
         }
@@ -46,7 +46,7 @@ export default function Query() {
     const authContext: any = React.useContext(AuthContext);
     const dashboardContext: any = React.useContext(DashboardContext);
 
-    const [newQuery, setNewQuery] = React.useState("SELECT COUNT($ts) FROM dtmi:ns:interface;1");
+    const [newQuery, setNewQuery] = React.useState("SELECT COUNT($ts) FROM dtmi:modelDefinition:m4f9gr8beu:ttjzdz95ao WHERE WITHIN_WINDOW(PT8H)");  
     const [query, setQuery] = React.useState('');
     const [chart, setChart] = React.useState('json');
 
@@ -133,13 +133,13 @@ export default function Query() {
             case 'line':
             case 'bar':
             case 'gauge':
-                return <Chart type={chart} data={queryResults.body} addHandler={addToDashboard} />
+                return <Chart type={chart} data={queryResults} addHandler={addToDashboard} />
             case 'number':
-                return <Number data={queryResults.body} addHandler={addToDashboard} />
+                return <Number data={queryResults} addHandler={addToDashboard} />
             case 'table':
-                return <Table data={queryResults.body} />
+                return <Table data={queryResults} />
             default:
-                return <Json data={queryResults.body} />
+                return <Json data={queryResults} />
         }
     }
 
@@ -182,10 +182,8 @@ export default function Query() {
                 <div className={chart === 'json' ? 'query-results-noscroll' : 'query-results'}>
                     {queryLoading ? <div className='workspace-loading'>Running query<br /><br /><FadeLoader /></div> :
                         queryError ? <div className='workspace-error'>{queryError}</div> :
-                            queryResults ? <>
-                                {renderResults()}
-                            </>
-                                : <div className='workspace-empty'>No results or waiting to Run query</div>
+                            queryResults ? <>{renderResults()}</> : 
+                                <div className='workspace-empty'>No results or waiting to Run queryX {renderResults()} </div>
                     }
                 </div>
             </div>
