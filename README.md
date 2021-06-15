@@ -1,5 +1,5 @@
 # iotc-query
-A Companion Experience using CRA, IoT Central "styles" and Fluent UI controls/icons to demonstrate how to query and visualize IoT Central data using the (Alpha) Public Query APIs
+A Companion Experience using CRA, IoT Central "styles" and Fluent UI controls/icons to demonstrate how to query and visualize IoT Central data using the (Private Preview) Query APIs
 
 # Installing, building and running the codebase
 
